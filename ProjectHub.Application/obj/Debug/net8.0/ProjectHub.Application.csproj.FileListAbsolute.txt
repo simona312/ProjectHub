@@ -1,0 +1,15 @@
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\bin\Debug\net8.0\ProjectHub.Application.deps.json
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\bin\Debug\net8.0\ProjectHub.Application.dll
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\bin\Debug\net8.0\ProjectHub.Application.pdb
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\obj\Debug\net8.0\ProjectHub.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\obj\Debug\net8.0\ProjectHub.Application.AssemblyInfoInputs.cache
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\obj\Debug\net8.0\ProjectHub.Application.AssemblyInfo.cs
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\obj\Debug\net8.0\ProjectHub.Application.csproj.CoreCompileInputs.cache
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\obj\Debug\net8.0\ProjectHub.Application.dll
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\obj\Debug\net8.0\refint\ProjectHub.Application.dll
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\obj\Debug\net8.0\ProjectHub.Application.pdb
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\obj\Debug\net8.0\ref\ProjectHub.Application.dll
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\obj\Debug\net8.0\ProjectHub.Application.csproj.AssemblyReference.cache
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\bin\Debug\net8.0\ProjectHub.Domin.dll
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\bin\Debug\net8.0\ProjectHub.Domin.pdb
+C:\Users\levko\source\repos\ProjectHub.Api\ProjectHub.Application\obj\Debug\net8.0\ProjectH.533F2EFC.Up2Date

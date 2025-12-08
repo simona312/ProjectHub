@@ -1,0 +1,15 @@
+﻿.vs/
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.log
+*.dbmdl
+*.dbproj.schemaview
+*.pdb
+*.userosscache
+*.msscci
+*.vscode/
+*.DS_Store
+*.localhistory/
