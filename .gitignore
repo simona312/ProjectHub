@@ -1,0 +1,46 @@
+# Build results
+bin/
+obj/
+out/
+[Bb]uild/
+[Ll]og/
+*.log
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio folders
+.vs/
+.vscode/
+
+# Backup & temporary files
+*.tmp
+*.temp
+*.bak
+*.ncb
+*.opendb
+*.VC.db
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Database
+*.mdf
+*.ldf
+
+# Publish outputs
+publish/
+*.publishsettings
+
+# JetBrains Rider
+.idea/
+*.DotSettings.user
+
+# Other
+.env

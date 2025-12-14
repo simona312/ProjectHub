@@ -25,7 +25,7 @@ namespace ProjectHub.Infrastructure.Services
         {
             return await _context.Projects
                 .Include(p => p.Tasks)
-                .FirstOrDefaultAsync(p => p.id == id);
+                .FirstOrDefaultAsync(p => p.Id == id);
         }
 
         public async Task<Project> CreateAsync(Project project)

@@ -11,6 +11,7 @@ namespace ProjectHub.Infrastructure.Data
         }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectTask> ProjectTasks { get; set; }
+        public DbSet<User> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

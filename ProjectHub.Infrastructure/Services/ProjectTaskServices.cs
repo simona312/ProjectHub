@@ -32,7 +32,7 @@ namespace ProjectHub.Infrastructure.Services
         {
             return await _context.ProjectTasks
                 .Include(t => t.Project)
-                .FirstOrDefaultAsync(t => t.id == id);
+                .FirstOrDefaultAsync(t => t.Id == id);
         }
 
         public async Task<ProjectTask> CreateAsync(ProjectTask task)

@@ -9,9 +9,11 @@
   <ItemGroup>
     <ProjectReference Include="..\ProjectHub.Application\ProjectHub.Application.csproj" />
     <ProjectReference Include="..\ProjectHub.Domin\ProjectHub.Domin.csproj" />
+    <ProjectReference Include="..\ProjectHub.Infrastructure\ProjectHub.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>

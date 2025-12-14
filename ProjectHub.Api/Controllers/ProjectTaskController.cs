@@ -82,13 +82,13 @@ namespace ProjectHub.Api.Controllers
             task = await _taskService.CreateAsync(task);
             //await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetAllTasks), new { id = task.id }, task);
+            return CreatedAtAction(nameof(GetAllTasks), new { id = task.Id }, task);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult>UpdateTask(int id, [FromBody] ProjectTask updatedTask)
         {
-            if (id != updatedTask.id)
+            if (id != updatedTask.Id)
                 return BadRequest("Task ID mismatch.");
 
             var success = await _taskService.UpdateAsync(updatedTask);
