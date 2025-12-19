@@ -16,12 +16,18 @@ namespace ProjectHub.Api.Controllers
             _taskService = taskService;
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllTasks()
+        public async Task<IActionResult> GetAllTasks(
+            [FromQuery] int page = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string? search = null,
+            [FromQuery] int? projectId = null,
+            [FromQuery] string? sortBy = "id",
+            [FromQuery] string? sortDir = "asc")
         {
-            var tasks = await _taskService.GetAllAsync();
+            var result = await _taskService.GetAllAsync(page, pageSize, search, projectId, sortBy, sortDir);
                 //.Include(t => t.Project)
                 //.ToListAsync();
-            return Ok(tasks);
+            return Ok(result);
         }
 
         [HttpGet("{id:int}")]

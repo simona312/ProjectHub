@@ -1,4 +1,5 @@
-﻿using ProjectHub.Domin.Entites;
+﻿using ProjectHub.Application.Dtos;
+using ProjectHub.Domin.Entites;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,7 +7,10 @@ namespace ProjectHub.Application.Services
 {
     public interface IProjectTaskService
     {
-        Task<List<ProjectTask>> GetAllAsync();
+        Task<PagedResult<ProjectTaskDto>> GetAllAsync(
+            int page, int pageSize,
+            string? search, int? projectId,
+            string? sortBy, string? sortDir);
         Task<ProjectTask?> GetByIdAsync(int id);
         Task<List<ProjectTask>> GetByProjectIdAsync(int projectId);
         Task<ProjectTask> CreateAsync(ProjectTask task);
