@@ -87,8 +87,10 @@ builder.Services.AddAuthentication(options =>
 
 
 var app = builder.Build();
+app.UseMiddleware<ProjectHub.Api.Middleware.ExceptionMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
+
 
 
 // Configure the HTTP request pipeline.
@@ -97,6 +99,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 

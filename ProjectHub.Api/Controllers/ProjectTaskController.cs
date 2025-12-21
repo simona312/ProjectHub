@@ -23,8 +23,14 @@ namespace ProjectHub.Api.Controllers
             _validator = validator;
             _taskService = taskService;
         }
-        
-        
+
+        //[HttpGet("throw")]
+        //public IActionResult Throw()
+        //{
+        //    throw new Exception("Test global error middleware");
+        //}
+
+
         [HttpGet]
         public async Task<IActionResult> GetAllTasks(
             [FromQuery] int page = 1,
