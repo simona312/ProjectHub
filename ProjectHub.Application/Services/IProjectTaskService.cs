@@ -3,6 +3,7 @@ using ProjectHub.Domin.Entites;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+
 namespace ProjectHub.Application.Services
 {
     public interface IProjectTaskService
@@ -13,7 +14,7 @@ namespace ProjectHub.Application.Services
             string? sortBy, string? sortDir);
         Task<ProjectTask?> GetByIdAsync(int id);
         Task<List<ProjectTask>> GetByProjectIdAsync(int projectId);
-        Task<ProjectTask> CreateAsync(ProjectTask task);
+        Task<int> CreateAsync(ProjectTaskCreateDto dto);
         Task<bool> UpdateAsync(ProjectTask task);
         Task<bool> DeleteAsync(int id);
     }

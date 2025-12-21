@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Contracts;
+﻿using ProjectHub.Domin.Enums;
+using System.Diagnostics.Contracts;
 
 namespace ProjectHub.Api.Dtos
 {

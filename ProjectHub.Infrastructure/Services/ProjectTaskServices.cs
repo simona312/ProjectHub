@@ -4,6 +4,7 @@ using ProjectHub.Application.Services;
 using ProjectHub.Domin.Entites;
 using ProjectHub.Infrastructure.Data;
 using ProjectHub.Application.Dtos;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace ProjectHub.Infrastructure.Services
 {
@@ -80,19 +81,40 @@ namespace ProjectHub.Infrastructure.Services
                 .FirstOrDefaultAsync(t => t.Id == id);
         }
 
-        public async Task<ProjectTask> CreateAsync(ProjectTask task)
+        public async Task<int> CreateAsync(ProjectTaskCreateDto dto)
         {
+            var task = new ProjectTask
+            {
+                Title = dto.Title,
+                Description = dto.Description,
+                Status = dto.Status,
+                Priority = dto.Priority,
+                DueDate = dto.DueDate,
+                ProjectId = dto.ProjectId
+            };
             _context.ProjectTasks.Add(task);
             await _context.SaveChangesAsync();
-            return task;
+
+            return task.Id;
+            
+           
         }
 
         public async Task<bool> UpdateAsync(ProjectTask task)
         {
-            _context.ProjectTasks.Update(task);
-            var result = await _context.SaveChangesAsync();
-            return result > 0;
+            var existing = await _context.Projects.FindAsync(task.Id);
+            if (existing == null)
+                return false;
+            existing.Name = existing.Name;
+            existing.Description = existing.Description;
+            existing.StartDate = existing.StartDate;
+            existing.EndDate = existing.EndDate;
+
+            await _context.SaveChangesAsync();
+            return true;
         }
+
+
 
         public async Task<bool> DeleteAsync(int id)
         {

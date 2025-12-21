@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ProjectHub.Application.Services;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using ProjectHub.Api.Dtos;
+using ProjectHub.Application.Dtos;
+using ProjectHub.Application.Services;
 using ProjectHub.Domin.Entites;
+using System.Reflection;
 
 
 namespace ProjectHub.Api.Controllers
@@ -10,11 +14,17 @@ namespace ProjectHub.Api.Controllers
     [Route("api/[controller]")]
     public class ProjectTaskController : ControllerBase
     {
-        private readonly IProjectTaskService _taskService ;
-        public ProjectTaskController(IProjectTaskService taskService)
+        private readonly IValidator<CreateProjectTaskDto> _validator;
+        private readonly IProjectTaskService _taskService;
+        public ProjectTaskController(
+            IValidator<CreateProjectTaskDto> validator,
+            IProjectTaskService taskService)
         {
+            _validator = validator;
             _taskService = taskService;
         }
+        
+        
         [HttpGet]
         public async Task<IActionResult> GetAllTasks(
             [FromQuery] int page = 1,
@@ -25,8 +35,8 @@ namespace ProjectHub.Api.Controllers
             [FromQuery] string? sortDir = "asc")
         {
             var result = await _taskService.GetAllAsync(page, pageSize, search, projectId, sortBy, sortDir);
-                //.Include(t => t.Project)
-                //.ToListAsync();
+            //.Include(t => t.Project)
+            //.ToListAsync();
             return Ok(result);
         }
 
@@ -66,39 +76,81 @@ namespace ProjectHub.Api.Controllers
         //}
 
         [HttpPost]
-        public async Task<IActionResult> CreateTask([FromBody] CreateProjectTaskDto dto)
+        public async Task<IActionResult> Create(
+    [FromBody] CreateProjectTaskDto dto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+           
+            var validationResult = await _validator.ValidateAsync(dto);
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult.Errors.Select(e => new
+                {
+                    field = e.PropertyName,
+                    error = e.ErrorMessage
+                }));
+            }
 
-            //var projectExists = await _context.Projects.AnyAsync(p => p.id == dto.ProjectId);
-            //if (!projectExists)
-            //    return BadRequest("Invalid ProjectId.");
-
-            var task = new ProjectTask
+            
+            var appDto = new ProjectTaskCreateDto
             {
                 Title = dto.Title,
                 Description = dto.Description,
                 Status = dto.Status,
                 Priority = dto.Priority,
-                DueDate = dto.DueDaate,
+                DueDate = dto.DueDate,
                 ProjectId = dto.ProjectId
             };
 
-            task = await _taskService.CreateAsync(task);
-            //await _context.SaveChangesAsync();
+            
+            var id = await _taskService.CreateAsync(appDto);
 
-            return CreatedAtAction(nameof(GetAllTasks), new { id = task.Id }, task);
+         
+            return Ok(new { id });
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult>UpdateTask(int id, [FromBody] ProjectTask updatedTask)
-        {
-            if (id != updatedTask.Id)
-                return BadRequest("Task ID mismatch.");
 
-            var success = await _taskService.UpdateAsync(updatedTask);
-            if (!success) return NotFound();
+
+
+
+
+
+
+        //var projectExists = await _context.Projects.AnyAsync(p => p.id == dto.ProjectId);
+        //if (!projectExists)
+        //    return BadRequest("Invalid ProjectId.");
+
+
+
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTask(int id, [FromBody] ProjectTaskUpdateDto dto,
+            [FromServices] IValidator<ProjectTaskUpdateDto> validator)
+        {
+          
+            var validation = await validator.ValidateAsync(dto);
+            if (!validation.IsValid)
+            {
+                return BadRequest(validation.Errors.Select(e => new
+                {
+                    field = e.PropertyName,
+                    error = e.ErrorMessage
+                }));
+            }
+            var task = await _taskService.GetByIdAsync(id);
+            if (task is null)
+                return NotFound();
+
+
+
+            task.Title = dto.Title;
+            task.Description = dto.Description;
+            task.Status = dto.Status;
+            task.Priority = dto.Priority;
+            task.DueDate = dto.DueDate;
+
+            var ok = await _taskService.UpdateAsync(task);
+            if (!ok)
+                return BadRequest("Update failed");
 
             //_context.Entry(updatedTask).State = EntityState.Modified;
             //await _context.SaveChangesAsync();

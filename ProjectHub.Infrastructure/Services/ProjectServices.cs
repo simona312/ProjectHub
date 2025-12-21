@@ -108,13 +108,13 @@ namespace ProjectHub.Infrastructure.Services
 
         public async Task<bool> UpdateAsync(int id, ProjectDto dto)
         {
-            var project = await _context.Projects.FindAsync(id);
-            if (project == null)
+            var existing = await _context.Projects.FindAsync(id);
+            if (existing == null)
                 return false;
-            project.Name = dto.Name;
-            project.Description = dto.Description;
-            project.StartDate = dto.StartDate;
-            project.EndDate = dto.EndDate;
+            existing.Name = existing.Name;
+            existing.Description = existing.Description;
+            existing.StartDate = existing.StartDate;
+            existing.EndDate = existing.EndDate;
 
             await _context.SaveChangesAsync();
             return true;
