@@ -111,10 +111,10 @@ namespace ProjectHub.Infrastructure.Services
             var existing = await _context.Projects.FindAsync(id);
             if (existing == null)
                 return false;
-            existing.Name = existing.Name;
-            existing.Description = existing.Description;
-            existing.StartDate = existing.StartDate;
-            existing.EndDate = existing.EndDate;
+            existing.Name = dto.Name ?? existing.Name;
+            existing.Description = dto.Description ?? existing.Description;
+            existing.StartDate = dto.StartDate ?? existing.StartDate;
+            existing.EndDate = dto.EndDate ?? existing.EndDate;
 
             await _context.SaveChangesAsync();
             return true;

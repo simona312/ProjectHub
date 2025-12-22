@@ -45,7 +45,7 @@ namespace ProjectHub.Infrastructure.Services
                 PasswordHash = passwordHash
 
             };
-            //Zacuvaj vo baza 
+     
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return true;
@@ -65,7 +65,6 @@ namespace ProjectHub.Infrastructure.Services
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.UTF8.GetBytes(_jWTSettings.Secret);
 
-            // *** ОВДЕ ДОДАВАМЕ now ***
             var now = DateTime.UtcNow;
 
             var tokenDescriptor = new SecurityTokenDescriptor
